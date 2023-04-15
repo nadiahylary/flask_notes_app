@@ -1,13 +1,14 @@
 from flask import Flask
 
+
+from views import views
+from auth import auth
+
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'nhaert'
 
 
-@app.route('/')
-def hello_world():  # put application's code here
-    return 'Hello World!'
-
+app.register_blueprint(views, url_prefix='/')
+app.register_blueprint(auth, url_prefix='/')
 
 if __name__ == '__main__':
     app.run(debug=True)
