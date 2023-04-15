@@ -10,7 +10,6 @@
     <orderEntry type="library" name="bootstrap" level="application" />
     <orderEntry type="library" name="@fortawesome/fontawesome-free" level="application" />
     <orderEntry type="library" name="jquery-3.6.4.slim" level="application" />
-    <orderEntry type="module" module-name="first_flaskProject" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Jinja2" />
