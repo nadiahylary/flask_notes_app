@@ -34,19 +34,17 @@ def signup():
 
         user = User.query.filter_by(email=email).first()
         if user:
-            flash('Email already exists.', category='error')
-        elif len(email) < 4:
-            flash('Email must be greater than 3 characters.', category='error')
+            flash('Your Email already exists.', category='error')
+        elif not email_validation(email):
+            flash('Your Email must be greater than 3 characters.', category='error')
         elif len(name) < 2:
-            flash('First name must be greater than 1 character.', category='error')
+            flash('Your name must be greater than 1 character.', category='error')
         elif password != conf_password:
             flash('Passwords don\'t match.', category='error')
         elif len(password) < 8:
-            flash('Password must be at least 8 characters.', category='error')
+            flash('The Password must be at least 8 characters.', category='error')
         else:
-
-            new_user = User(email=email, name=name, password=generate_password_hash(
-                password, method='sha256'))
+            new_user = User(email=email, name=name, password=generate_password_hash(password, method='sha256'))
             new_user.is_loggedin = True
             db.session.add(new_user)
             db.session.commit()
