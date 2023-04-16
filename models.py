@@ -2,6 +2,7 @@ from flask_login import UserMixin
 from sqlalchemy.sql import func
 from . import db
 import sqlalchemy.orm
+from sqlalchemy import ForeignKey
 
 
 class User(db.Model, UserMixin):
@@ -17,7 +18,6 @@ class User(db.Model, UserMixin):
     #     order_by="desc(Note.date_created)"
 
 
-
 class Note(db.Model):
     __tablename__ = "notes"
     id = db.Column(db.Integer, primary_key=True)
@@ -25,4 +25,4 @@ class Note(db.Model):
     content = db.Column(db.String(10000), nullable=False)
     date_created = db.Column(db.DateTime(timezone=True), default=func.now)
     last_edited = db.Column(db.DateTime(timezone=True))
-    user_id = db.Column(db.Integer, db.Foreignkey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
