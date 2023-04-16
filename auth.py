@@ -3,9 +3,8 @@ import re
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_user, current_user, login_required, logout_user
 from werkzeug.security import check_password_hash, generate_password_hash
-
-from . import db
-from .models import User
+from app import db
+from models import User
 
 auth = Blueprint('auth', __name__)
 
@@ -29,8 +28,8 @@ def signup():
     if request.method == 'POST':
         email = request.form.get('email')
         name = request.form.get('name')
-        password = request.form.get('password')
-        conf_password = request.form.get('conf_password')
+        password = str(request.form.get('password'))
+        conf_password = str(request.form.get('conf_password'))
 
         user = User.query.filter_by(email=email).first()
         if user:
@@ -40,6 +39,7 @@ def signup():
         elif len(name) < 2:
             flash('Your name must be greater than 1 character.', category='error')
         elif password != conf_password:
+            print(password, conf_password)
             flash('Passwords don\'t match.', category='error')
         elif len(password) < 8:
             flash('The Password must be at least 8 characters.', category='error')
