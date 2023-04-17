@@ -49,7 +49,7 @@ def signup():
             db.session.commit()
             login_user(new_user, remember=True)
             flash('Account created!', category='success')
-            return redirect('/')
+            return redirect(url_for('views.index'))
 
     return render_template("sign-up.html", user=current_user)
 
@@ -66,7 +66,7 @@ def login():
                 flash('Logged in successfully!', category='success')
                 user.is_loggedin = True
                 login_user(user, remember=True)
-                return redirect('/')
+                return redirect(url_for('views.index'))
             else:
                 flash('Incorrect password, try again.', category='error')
         else:
