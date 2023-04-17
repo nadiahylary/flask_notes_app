@@ -7,7 +7,7 @@ import json
 from sqlalchemy.sql import func
 
 from app import db
-from models import Note
+from models import Note, User
 
 views = Blueprint('views', __name__)
 
@@ -48,6 +48,8 @@ def delete_note(id):
 @login_required
 @views.route('/edit-note/<int:id>', methods=['GET', 'POST'])
 def edit_note(id):
+    # notes = current_user.notes
+    # updated_note = notes.get(id)
     updated_note = Note.query.get_or_404(id)
     if request.method == 'GET':
         return render_template("edit-note.html", user=current_user, note=updated_note)
@@ -81,10 +83,19 @@ def view_note(id):
 # Invalid URL
 @views.errorhandler(404)
 def page_not_found(e):
-    return render_template("404.html"), 404
+    return render_template("404.html", user=current_user), 404
 
 
 # Internal Server error
 @views.errorhandler(500)
 def server_error(e):
-    return render_template("500.html"), 500
+    return render_template("500.html", user=current_user), 500
+
+
+# User account information
+@login_required
+@views.route('/user-account/<int:id>')
+def user_account(id):
+    user = User.query.query.get_or_404(id)
+    return render_template("user-info.html", user=current_user)
+

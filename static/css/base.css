@@ -1,7 +1,8 @@
 body{
     text-align: center;
     font-family: "Copperplate Gothic Bold", "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
-    background-color: grey;
+    background-color: #f3f3f3;
+
 }
  header{
      font-family: "Copperplate Gothic Bold", "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;

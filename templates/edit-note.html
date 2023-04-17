@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 
-{% block title %}Home Page{% endblock %}
+{% block title %}Edit {{ note.title }}{% endblock %}
 
 {% block css %}{% endblock %}
 
-{% block body %}*
-    <h1>Add a New Note</h1>
+{% block body %}
+
+    <h1>Edit Note</h1>
     <div class="mask d-flex align-items-center h-100 gradient-custom-3" style="width: 100%;">
             <div class="container h-100">
               <div class="row d-flex justify-content-center align-items-center h-100">
@@ -16,7 +17,7 @@
                             <p>Created on: {{ note.date_created.strftime("%m/%d/%Y, %H:%M:%S") }}</p>
                             <p>Last Edited: {{ note.last_edited.strftime("%m/%d/%Y, %H:%M:%S") }}</p>
                         </span>
-                        <form method="POST" action="/edit-note/{{ task.id }}" }}>
+                        <form method="POST" action="/edit-note/{{ note.id }}" }}>
                             <input type="text" name="title" class="form-control" value="{{ note.title }}" style="font-size: 16px;">
                             <br>
                             <textarea name="note" id="note" class="form-control" placeholder="Write your thoughts, course notes, etc..." style="width: 100%;height: 500px;padding: 12px 20px;background-color: #f8f8f8;font-size: 16px;resize: none;">{{ note.content }}</textarea>
